@@ -134,7 +134,7 @@
             hub.getNotes().forEach(function(item){
                 htmlStr +=
                     '<li class="note-item" data-itemid="'+ item.id +'">' +
-                        '<a href="#" class="delete-note">X</a>' +
+                        '<a href="#" class="delete-note">&#4030;</a>' +
                             item.content +
                         '<span>'+ new Date(item.created) +'</span>'+
                     '</li>';

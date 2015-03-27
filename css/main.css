@@ -32,12 +32,21 @@ ul{
 }
 
 li.note-item{
-    padding: 7px;
+    position: relative;
+    padding: 30px 7px 7px;
     background: lightblue;
     margin: 4px;
     border-radius: 7px;
+    min-height:50px;
 }
 
 li.note-item span{
     float:right;
+}
+
+.delete-note{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    text-decoration: none;
 }
