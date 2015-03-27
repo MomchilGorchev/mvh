@@ -65,6 +65,13 @@
      * }}
      */
     var hub = {
+
+        // Initiate the model and the view
+        init: function(){
+            model.init();
+            view.init();
+        },
+
         // Passes a new note from the view to the model
         addNewNote: function(note){
             var now = Date.now();
@@ -87,12 +94,6 @@
         // Query the model for all data
         getNotes: function(){
             return model.getAllNotes().reverse();
-        },
-
-        // Initiate the model and the view
-        init: function(){
-            model.init();
-            view.init();
         }
     };
 
