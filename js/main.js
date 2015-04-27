@@ -7,10 +7,10 @@
     /**
      * The MODEL of the application - responsible for storing the data.
      * @type {{
-     *  init: Function,
-     *  add: Function,
-     *  remove: Function,
-     *  getAllNotes: Function
+     *      init: Function,
+     *      add: Function,
+     *      remove: Function,
+     *      getAllNotes: Function
      *  }}
      */
     var model = {
@@ -32,7 +32,7 @@
         remove: function(noteId){
             var data = JSON.parse(localStorage.notes);
             // Iterate over the list to find the note to be deleted.
-            // This metohd will be different for different data schemas
+            // This method will be different for different data schemas
             data.forEach(function(note){
                 if(note.id === +noteId){
                     // If removing the last index
@@ -58,10 +58,10 @@
      * The HUB/CONTROLLER of the application
      * Taking care of the communication between the MODEL and the VIEW
      * @type {{
-     *  addNewNote: Function,
-     *  deleteNote: Function,
-     *  getNotes: Function,
-     *  init: Function
+     *      addNewNote: Function,
+     *      deleteNote: Function,
+     *      getNotes: Function,
+     *      init: Function
      * }}
      */
     var hub = {
@@ -70,6 +70,7 @@
         init: function(){
             model.init();
             view.init();
+            statusView.init();
         },
 
         // Passes a new note from the view to the model
@@ -94,6 +95,10 @@
         // Query the model for all data
         getNotes: function(){
             return model.getAllNotes().reverse();
+        },
+
+        getAppStatus: function(){
+            return model && view;
         }
     };
 
@@ -101,8 +106,8 @@
      * The VIEW/VIEWS of the application.
      * Manages all DOM manipulation and event binding code
      * @type {{
-     *  init: Function,
-     *  render: Function
+     *      init: Function,
+     *      render: Function
      * }}
      */
     var view = {
@@ -143,5 +148,24 @@
             this.notesList.html(htmlStr);
         }
     };
+
+    // Just the status view
+    var statusView = {
+        init: function(){
+            this.statusBar = $('#statusBar');
+            var appStatus = hub.getAppStatus();
+            statusView.render()
+        },
+
+        render: function(){
+            var statusText;
+            hub.getAppStatus ?  statusText = 'All systems functional' :  statusText = 'System malfunctioning...';
+            this.statusBar.html(statusText);
+        }
+
+    };
+
     hub.init();
+
+
 })();
