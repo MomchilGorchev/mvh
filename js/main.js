@@ -76,11 +76,14 @@
         // Passes a new note from the view to the model
         addNewNote: function(note){
             var now = Date.now();
-            model.add({
-                content: note,
-                created: now,
-                id: now * 3
-            });
+
+            if(note.length > 0){
+                model.add({
+                    content: note,
+                    created: now,
+                    id: now * 3
+                });
+            }
             view.render();
         },
 

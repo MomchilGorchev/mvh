@@ -45,8 +45,24 @@ li.note-item span{
 }
 
 .delete-note{
+
+}
+
+#statusBar{
+    color: #438642;
+    width: 100%;
+    padding:10px;
+}
+ul.note-controls{
+    list-style-type:none;
     position: absolute;
     top: 5px;
     right: 5px;
     text-decoration: none;
+    width:100px;
+    text-align: center;
+}
+ul.note-controls li{
+    display: inline-block;
+    margin-left: 10px;
 }
