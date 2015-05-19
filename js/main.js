@@ -22,6 +22,13 @@
             if(!localStorage.notes){
                 localStorage.notes = JSON.stringify([]);
             }
+
+            $.ajax({
+                url: "http://api.openweathermap.org/data/2.5/weather?q=London,uk",
+                method: "GET",
+                dataType: 'json',
+                success: this.getApiData
+            });
         },
 
         // Add new Note to the list
@@ -56,17 +63,9 @@
             return JSON.parse(localStorage.notes);
         },
 
-        getExternalData: function(){
-            var response =  $.ajax({
-                url: "http://api.openweathermap.org/data/2.5/weather?q=London,uk",
-                method: "GET",
-                dataType: 'json'
-            }).done(function(res){
-                this.collectedData = res;
-                return this.collectedData;
-            }).fail(function(err){
-                console.log(err);
-            });
+
+        getApiData:function(data){
+            return data;
         }
     };
 
@@ -122,7 +121,7 @@
         },
 
         fetchExternal: function(){
-            return model.getExternalData();
+            return model.getApiData();
         }
     };
 
