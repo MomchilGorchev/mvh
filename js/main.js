@@ -62,12 +62,11 @@
                 method: "GET",
                 dataType: 'json'
             }).done(function(res){
-                model.collectedData = res;
+                this.collectedData = res;
+                return this.collectedData;
             }).fail(function(err){
                 console.log(err);
             });
-
-            return model.collectedData;
         }
     };
 
@@ -198,7 +197,7 @@
             this.map = this.displayArea.find('.map');
 
             var serviceResponce = hub.fetchExternal();
-            var coords = serviceResponce.coord;
+            //var coords = serviceResponce.coord;
 
             console.log(serviceResponce);
 
