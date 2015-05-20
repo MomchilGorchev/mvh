@@ -262,6 +262,14 @@
                             }
                         });
                         infowindow.open(map);
+
+                        var widget = document.getElementById('forecast_embed'),
+                            widgetParent = widget.parentNode;
+                        widget.src = 'http://forecast.io/embed/#lat='+ event.latLng.lat() +'&lon='+ event.latLng.lng() +'&name=Downtown '+ event.feature.getProperty("city") +'&color=#00aaff&font=Georgia&units=uk';
+                        widgetParent.removeChild(widget);
+                        widgetParent.appendChild(widget);
+
+
                     });
                 };
                 var checkIfDataRequested = function() {
