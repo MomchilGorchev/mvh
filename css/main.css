@@ -44,10 +44,10 @@ li.note-item span{
     float:right;
 }
 
-#map{
-    height: 350px;
-    height: 350px;
-}
+/*#map{*/
+    /*width: 350px;*/
+    /*height: 350px;*/
+/*}*/
 
 .delete-note{
     position: absolute;

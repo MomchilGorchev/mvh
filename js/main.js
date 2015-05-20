@@ -180,7 +180,7 @@
 
             this.displayArea = $('#weather');
             this.location = this.displayArea.find('.location');
-            this.map = this.displayArea.find('.map');
+            this.map = this.displayArea.find('#map');
             this.render();
         },
 
@@ -190,7 +190,7 @@
                 url: "http://api.openweathermap.org/data/2.5/weather?q=London,uk",
                 method: "GET",
                 //async: false,
-                dataType: 'json'
+                dataType: 'jsonp'
             }).done(function(data){
                 console.log(data);
 
@@ -198,7 +198,7 @@
             });
 
             function drawMap(data){
-                var mapLocation = new google.maps.LatLng(data.coord.lat, data.coord.lon);
+                var mapLocation = new google.maps.LatLng(51.50, 0.13);
 
                 var mapOptions = {
                     center: mapLocation,
