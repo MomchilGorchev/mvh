@@ -15,20 +15,11 @@
      */
     var model = {
         // Create DB if not existing
-
-        collectedData: null,
-
         init: function(){
             if(!localStorage.notes){
                 localStorage.notes = JSON.stringify([]);
             }
 
-            $.ajax({
-                url: "http://api.openweathermap.org/data/2.5/weather?q=London,uk",
-                method: "GET",
-                dataType: 'json',
-                success: this.getApiData
-            });
         },
 
         // Add new Note to the list
@@ -61,11 +52,6 @@
         // Send all notes
         getAllNotes: function(){
             return JSON.parse(localStorage.notes);
-        },
-
-
-        getApiData:function(data){
-            return data;
         }
     };
 
@@ -118,11 +104,12 @@
 
         getAppStatus: function(){
             return model && view;
-        },
-
-        fetchExternal: function(){
-            return model.getApiData();
         }
+
+        //fetchExternal: function(){
+        //
+        //
+        //}
     };
 
     /**
@@ -194,19 +181,41 @@
             this.displayArea = $('#weather');
             this.location = this.displayArea.find('.location');
             this.map = this.displayArea.find('.map');
-
-            var serviceResponce = hub.fetchExternal();
-            //var coords = serviceResponce.coord;
-
-            console.log(serviceResponce);
-
-            //weatherView.render(this.coords);
-
+            this.render();
         },
 
-        render: function(coords){
-            var mapLocation = new google.maps.LatLng(coords.lat, coords.lon);
+        render: function(){
 
+            $.ajax({
+                url: "http://api.openweathermap.org/data/2.5/weather?q=London,uk",
+                method: "GET",
+                //async: false,
+                dataType: 'json'
+            }).done(function(data){
+                console.log(data);
+
+                drawMap(data);
+            });
+
+            function drawMap(data){
+                var mapLocation = new google.maps.LatLng(data.coord.lat, data.coord.lon);
+
+                var mapOptions = {
+                    center: mapLocation,
+                    zoom: 3
+                };
+                    //styles: [{"featureType":"all","elementType":"labels.text.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"all","elementType":"labels.text.stroke","stylers":[{"color":"#000000"},{"lightness":13}]},{"featureType":"administrative","elementType":"geometry.fill","stylers":[{"color":"#000000"}]},{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#144b53"},{"lightness":14},{"weight":1.4}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#08304b"}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#0c4152"},{"lightness":5}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#000000"}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#0b434f"},{"lightness":25}]},{"featureType":"road.arterial","elementType":"geometry.fill","stylers":[{"color":"#000000"}]},{"featureType":"road.arterial","elementType":"geometry.stroke","stylers":[{"color":"#0b3d51"},{"lightness":16}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#000000"}]},{"featureType":"transit","elementType":"all","stylers":[{"color":"#146474"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#021019"}]}]    };
+                var map = new google.maps.Map(this.map,
+                    mapOptions);
+            }
+
+            //this.serviceResponse = hub.serviceResponse;
+            //var coords = serviceResponce.coord;
+
+            //console.log(hub.serviceResponse);
+
+            //var mapLocation = new google.maps.LatLng(serviceResponce.coord.lat, serviceResponce.coord.lon);
+            //
             //var mapOptions = {
             //    center: mapLocation,
             //    zoom: 3,
