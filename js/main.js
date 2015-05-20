@@ -105,11 +105,6 @@
         getAppStatus: function(){
             return model && view && navigator.onLine;
         }
-
-        //fetchExternal: function(){
-        //
-        //
-        //}
     };
 
     /**
@@ -195,11 +190,11 @@
                         zoom: 5,
                         center: new google.maps.LatLng(51.5072,-0.1275)
                     };
-                    map = new google.maps.Map(document.getElementById('map'),
+                    map = new google.maps.Map(this.map,
                         mapOptions);
                     // Add interaction listeners to make weather requests
                     google.maps.event.addListener(map, 'idle', checkIfDataRequested);
-                    // Sets up and populates the info window with details
+                    // Sets up and populates the info window with detailsope
                     map.data.addListener('click', function(event) {
                         infowindow.setContent(
                             "<img src=" + event.feature.getProperty("icon") + ">"
@@ -224,7 +219,7 @@
                             widgetParent = widget.parentNode;
                         widget.src = 'http://forecast.io/embed/#lat='+
                             event.latLng.lat() +'&lon='+
-                            event.latLng.lng() +'&name=Downtown '+
+                            event.latLng.lng() +'&name='+
                             event.feature.getProperty("city") +
                             '&color=#00aaff&font=Georgia&units=uk';
                         widgetParent.removeChild(widget);
@@ -309,13 +304,13 @@
                     // returns object
                     return feature;
                 };
-// Add the markers to the map
+                // Add the markers to the map
                 var drawIcons = function (weather) {
                     map.data.addGeoJson(geoJSON);
                     // Set the flag to finished
                     gettingData = false;
                 };
-// Clear data layer and geoJSON
+                // Clear data layer and geoJSON
                 var resetData = function () {
                     geoJSON = {
                         type: "FeatureCollection",
