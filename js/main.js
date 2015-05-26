@@ -174,7 +174,6 @@
         init: function(){
 
             this.displayArea = $('#weather');
-            this.location = this.displayArea.find('.location');
             this.map = this.displayArea.find('#map');
             this.render();
         },
@@ -327,5 +326,4 @@
     //};
 
     hub.init();
-
 })();
