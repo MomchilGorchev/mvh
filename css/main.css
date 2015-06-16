@@ -46,6 +46,8 @@ li.note-item span{
 
 #map{
     width: 100%;
+    max-width: 1200px;
+    margin: 10px auto;
     height: 550px;
 }
 
@@ -75,6 +77,8 @@ ul.note-controls li{
     display: inline-block;
     margin-left: 10px;
 }
+
+
 .spinner{
     border-bottom: 5px solid lightgreen;
     width: 80px;
